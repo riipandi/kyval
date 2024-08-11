@@ -14,7 +14,7 @@ and flexible alternative for simple data storage needs.
 LibSQL as the database backend, replacing SQLite. This change enables Kyval to have improved
 flexibility in data storage.
 
-## Usaage
+## Usage
 
 TODO
 
