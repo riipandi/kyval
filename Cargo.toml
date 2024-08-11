@@ -1,7 +1,7 @@
 [package]
 name = "kyval"
 description = "Simple key-value store based on LibSQL."
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Aris Ripandi <aris@duck.com>"]
 repository = "http://github.com/riipandi/kyval"
 homepage = "http://github.com/riipandi/kyval"

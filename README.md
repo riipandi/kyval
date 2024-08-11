@@ -1,4 +1,4 @@
-# ⚿ Kyval
+# Kyval
 
 [![Crates version](https://img.shields.io/crates/v/kyval)](https://crates.io/crates/kyval)
 [![Rust version](https://img.shields.io/badge/rust-v1.79-blue.svg?logo=rust&label=MSRV)](https://www.rust-lang.org)
@@ -6,17 +6,73 @@
 
 ---
 
-Kyval is a simple key-value store based on LibSQL. This project is a fork of [Keyv Rust][keyv-rust],
+Kyval is a simple key-value store based on LibSQL. This project is a fork of [Kyval Rust][keyv-rust],
 originally created by [Christian Llontop][chrisllontop]. By utilizing LibSQL, Kyval offers a lightweight
 and flexible alternative for simple data storage needs.
 
-**Main changes:** The primary difference between Kyval and the original Keyv Rust is the use of
+**Main changes:** The primary difference between Kyval and the original Kyval Rust is the use of
 LibSQL as the database backend, replacing SQLite. This change enables Kyval to have improved
 flexibility in data storage.
 
 ## Usage
 
-TODO
+### Instalation
+
+```sh
+cargo add kyval
+```
+
+### Interacting with Store
+
+```rust
+use kyval::Kyval;
+
+#[tokio::main]
+async fn main() {
+
+    let kyval_store = KyvalStoreBuilder::new()
+        .uri(":memory:")
+        .table_name("kv_store")
+        .build()
+        .await.unwrap();
+
+    let keyv = Kyval::try_new(kyval_store).await.unwrap();
+
+    kyval.set("number", 42).await.unwrap();
+    kyval.set("number", 10).await.unwrap();
+    kyval.set("array", vec!["hola", "test"]).await.unwrap();
+    kyval.set("string", "life long").await.unwrap();
+
+    match kyval.get("number").await.unwrap() {
+        Some(number) => {
+            let number: i32 = serde_json::from_value(number).unwrap();
+            assert_eq!(number, 10);
+        }
+        None => assert!(false),
+    }
+
+    match kyval.get("string").await.unwrap() {
+        Some(string) => {
+            let string: String = serde_json::from_value(string).unwrap();
+            assert_eq!(string, "life long");
+        }
+        None => assert!(false),
+    }
+
+    match kyval.get("array").await.unwrap() {
+        Some(array) => {
+            let array: Vec<String> = serde_json::from_value(array).unwrap();
+            assert_eq!(array, vec!["hola".to_string(), "test".to_string()])
+        }
+        None => assert!(false),
+    }
+
+    match kyval.remove_many(&["number", "string"]).await {
+        Ok(_) => {}
+        Err(_) => assert!(false),
+    }
+}
+```
 
 ## License
 
