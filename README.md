@@ -22,9 +22,11 @@ TODO
 
 Licensed under either of [Apache License 2.0][license-apache] or [MIT license][license-mit] at your option.
 
-> Unless you explicitly state otherwise, any contribution intentionally submitted
-> for inclusion in this project by you, as defined in the Apache-2.0 license, shall
-> be dual licensed as above, without any additional terms or conditions.
+```plaintext
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this project by you, as defined in the Apache-2.0 license, shall
+be dual licensed as above, without any additional terms or conditions.
+```
 
 Copyrights in this project are retained by their contributors.
 
