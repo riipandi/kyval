@@ -1,0 +1,28 @@
+[package]
+name = "kyval"
+description = "Simple key-value store based on LibSQL."
+version = "0.0.1"
+authors = ["Aris Ripandi <aris@duck.com>"]
+repository = "http://github.com/riipandi/kyval"
+documentation = "https://docs.rs/kyval/latest/kyval"
+homepage = "http://github.com/riipandi/kyval"
+keywords = ["key-value", "store", "storage", "async", "libsql"]
+license = "MIT OR Apache-2.0"
+rust-version = "1.79"
+edition = "2021"
+publish = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libsql = { version = "0.5", features = [ "parser", "serde" ] }
+log = "^0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["raw_value"] }
+thiserror = "1.0"
+tokio = { version = "1.39", features = [] }
+
+# [features]
+# libsql = ["libsql/parser", "libsql/serde"]
+# full = ["libsql"]
+# default = []

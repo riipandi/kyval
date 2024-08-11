@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.DS_Store
+.DS_Store?
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# envars
+.env*
+!.env.*example
+
+# output
+target/
