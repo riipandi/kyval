@@ -37,7 +37,6 @@ use crate::{Store, StoreError, StoreModel, DEFAULT_NAMESPACE_NAME};
 ///
 /// ```rust,no_run
 /// # use kyval::adapter::KyvalStoreBuilder;
-///
 /// #[tokio::main]
 /// async fn main(){
 ///     let store = KyvalStoreBuilder::new()
@@ -55,16 +54,17 @@ use crate::{Store, StoreError, StoreModel, DEFAULT_NAMESPACE_NAME};
 /// # use std::sync::Arc;
 /// # use kyval::adapter::KyvalStoreBuilder;
 /// # use libsql::Connection;
-///
 /// #[tokio::main]
 /// async fn main() {
 ///     let db_url = format!("libsql://localhost:8080?tls=0");
+///
 ///     let conn = libsql::Builder::new_remote(db_url, format!(""))
 ///         .build()
 ///         .await
 ///         .unwrap()
 ///         .connect()
 ///         .unwrap();
+///
 ///     let store = KyvalStoreBuilder::new()
 ///         .connnection(conn.into())
 ///         .table_name("custom_table_name")

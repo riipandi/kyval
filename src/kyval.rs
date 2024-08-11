@@ -48,7 +48,6 @@ pub enum KyvalError {
 ///
 /// ```rust,no_run
 /// # use kyval::Kyval;
-///
 /// #[tokio::main]
 /// async fn main() {
 ///     let kyval = Kyval::default();
@@ -96,7 +95,6 @@ impl Kyval {
     /// ```rust,no_run
     /// # use kyval::{Kyval};
     /// # use kyval::adapter::KyvalStoreBuilder;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     /// let store = KyvalStoreBuilder::new()
@@ -133,7 +131,6 @@ impl Kyval {
     ///
     /// ```rust,no_run
     /// # use kyval::Kyval;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let kyval = Kyval::default();
@@ -166,7 +163,6 @@ impl Kyval {
     ///
     /// ```rust,no_run
     /// # use kyval::Kyval;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let kyval = Kyval::default();
@@ -199,7 +195,6 @@ impl Kyval {
     ///
     /// ```rust,no_run
     /// # use kyval::Kyval;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let kyval = Kyval::default();
@@ -238,11 +233,12 @@ impl Kyval {
     ///
     /// ```rust,no_run
     /// # use kyval::Kyval;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let kyval = Kyval::default();
+    ///
     ///     let pairs = kyval.list().await.unwrap();
+    ///
     ///     for item in pairs {
     ///         println!("Key: {}, Value: {}", item.key, item.value);
     ///     }
@@ -267,7 +263,6 @@ impl Kyval {
     ///
     /// ```rust,no_run
     /// # use kyval::Kyval;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let kyval = Kyval::default();
@@ -318,7 +313,6 @@ impl Kyval {
     ///
     /// ```rust,no_run
     /// # use kyval::Kyval;
-    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let kyval = Kyval::default();
