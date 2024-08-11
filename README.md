@@ -2,6 +2,7 @@
 
 [![Crates version](https://img.shields.io/crates/v/kyval)](https://crates.io/crates/kyval)
 [![Rust version](https://img.shields.io/badge/rust-v1.79-blue.svg?logo=rust&label=MSRV)](https://www.rust-lang.org)
+[![Crates.io Total Downloads](https://img.shields.io/crates/d/kyval)](https://crates.io/crates/kyval)
 [![Contribution welcome](https://img.shields.io/badge/Contributions-welcome-gray.svg)](https://github.com/riipandi/kyval/pulse)
 
 ---

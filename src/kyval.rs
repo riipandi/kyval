@@ -46,27 +46,31 @@ pub enum KyvalError {
 ///
 /// ## Set and get a value
 ///
-/// ```
+/// ```rust,no_run
 /// # use kyval::Kyval;
-/// let kyval = Kyval::default();
 ///
-/// kyval.set("array", vec!["hola", "test"]).unwrap();
+/// #[tokio::main]
+/// async fn main() {
+///     let kyval = Kyval::default();
 ///
-/// match kyval.get("array").unwrap() {
-///     Some(array) => {
-///         let array: Vec<String> = serde_json::from_value(array).unwrap();
-///         assert_eq!(array, vec!["hola".to_string(), "test".to_string()])
+///     kyval.set("array", vec!["hola", "test"]).await.unwrap();
+///
+///     match kyval.get("array").await.unwrap() {
+///         Some(array) => {
+///             let array: Vec<String> = serde_json::from_value(array).unwrap();
+///             assert_eq!(array, vec!["hola".to_string(), "test".to_string()])
+///         }
+///         None => assert!(false),
 ///     }
-///     None => assert!(false),
-/// }
 ///
-/// kyval.set("string", "life long").unwrap();
-/// match kyval.get("string").unwrap() {
-///     Some(string) => {
-///         let string: String = serde_json::from_value(string).unwrap();
-///         assert_eq!(string, "life long");
+///     kyval.set("string", "life long").await.unwrap();
+///     match kyval.get("string").await.unwrap() {
+///         Some(string) => {
+///             let string: String = serde_json::from_value(string).unwrap();
+///             assert_eq!(string, "life long");
+///         }
+///         None => assert!(false),
 ///     }
-///     None => assert!(false),
 /// }
 /// ```
 pub struct Kyval {
@@ -89,17 +93,21 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::{Kyval};
-    /// # use kyval::{KyvalStoreBuilder};
+    /// # use kyval::adapter::KyvalStoreBuilder;
     ///
+    /// #[tokio::main]
+    /// async fn main() {
     /// let store = KyvalStoreBuilder::new()
     ///     .uri(":memory:")
     ///     .table_name("custom_table_name")
     ///     .build()
+    ///     .await
     ///     .unwrap();
     ///
-    /// let kyval = Kyval::try_new(store).unwrap();
+    /// let kyval = Kyval::try_new(store).await.unwrap();
+    /// }
     /// ```
     pub async fn try_new<S: Store + 'static>(
         store: S,
@@ -123,10 +131,14 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
-    /// kyval.set("key", "hello world").unwrap();
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
+    ///     kyval.set("key", "hello world").await.unwrap();
+    /// }
     /// ```
     pub async fn set<T: Serialize>(
         &self,
@@ -152,10 +164,14 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
-    /// kyval.set_with_ttl("temp_key", "temp_value", 3600).unwrap(); // Expires in 1 hour
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
+    ///     kyval.set_with_ttl("temp_key", "temp_value", 3600).await.unwrap(); // Expires in 1 hour
+    /// }
     /// ```
     pub async fn set_with_ttl<T: Serialize>(
         &self,
@@ -181,27 +197,31 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
     ///
-    /// kyval.set("array", vec!["hola", "test"]).unwrap();
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
     ///
-    /// match kyval.get("array").unwrap() {
-    ///     Some(array) => {
-    ///         let array: Vec<String> = serde_json::from_value(array).unwrap();
-    ///         assert_eq!(array, vec!["hola".to_string(), "test".to_string()])
+    ///     kyval.set("array", vec!["hola", "test"]).await.unwrap();
+    ///
+    ///     match kyval.get("array").await.unwrap() {
+    ///         Some(array) => {
+    ///             let array: Vec<String> = serde_json::from_value(array).unwrap();
+    ///             assert_eq!(array, vec!["hola".to_string(), "test".to_string()])
+    ///         }
+    ///         None => assert!(false),
     ///     }
-    ///     None => assert!(false),
-    /// }
     ///
-    /// kyval.set("string", "life long").unwrap();
-    /// match kyval.get("string").unwrap() {
-    ///     Some(string) => {
-    ///         let string: String = serde_json::from_value(string).unwrap();
-    ///         assert_eq!(string, "life long");
+    ///     kyval.set("string", "life long").await.unwrap();
+    ///     match kyval.get("string").await.unwrap() {
+    ///         Some(string) => {
+    ///             let string: String = serde_json::from_value(string).unwrap();
+    ///             assert_eq!(string, "life long");
+    ///         }
+    ///         None => assert!(false),
     ///     }
-    ///     None => assert!(false),
     /// }
     /// ```
     pub async fn get(&self, key: &str) -> Result<Option<Value>, KyvalError> {
@@ -216,12 +236,16 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
-    /// let pairs = kyval.list().await.unwrap();
-    /// for (key, value) in pairs {
-    ///     println!("Key: {}, Value: {}", key, value);
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
+    ///     let pairs = kyval.list().await.unwrap();
+    ///     for item in pairs {
+    ///         println!("Key: {}, Value: {}", item.key, item.value);
+    ///     }
     /// }
     /// ```
     pub async fn list(&self) -> Result<Vec<StoreModel>, KyvalError> {
@@ -241,10 +265,14 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
-    /// kyval.remove("my_key").unwrap(); // Removes "my_key" from the store
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
+    ///     kyval.remove("my_key").await.unwrap(); // Removes "my_key" from the store
+    /// }
     /// ```
     pub async fn remove(&self, key: &str) -> Result<(), KyvalError> {
         Ok(self.store.remove(key).await?)
@@ -263,10 +291,13 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
-    /// kyval.remove_many(&["key1", "key2"]).unwrap(); // Removes "key1" and "key2"
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
+    ///     kyval.remove_many(&["key1", "key2"]).await.unwrap(); // Removes "key1" and "key2"
+    /// }
     /// ```
     pub async fn remove_many<T: AsRef<str> + Sync>(
         &self,
@@ -285,10 +316,14 @@ impl Kyval {
     ///
     /// # Examples
     ///
-    /// ```
+    /// ```rust,no_run
     /// # use kyval::Kyval;
-    /// let kyval = Kyval::default();
-    /// kyval.clear().unwrap(); // Clears the entire store
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let kyval = Kyval::default();
+    ///     kyval.clear().await.unwrap(); // Clears the entire store
+    /// }
     /// ```
     pub async fn clear(&self) -> Result<(), KyvalError> {
         Ok(self.store.clear().await?)
