@@ -11,6 +11,7 @@ license = "MIT OR Apache-2.0"
 rust-version = "1.79"
 edition = "2021"
 publish = true
+exclude = ["example/*"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
