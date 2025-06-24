@@ -16,12 +16,12 @@ exclude = ["example/*"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-libsql = { version = "0.5", features = [ "parser", "serde" ] }
-log = "^0.4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = { version = "1.0", features = ["raw_value"] }
-thiserror = "1.0"
-tokio = { version = "1.39", features = [] }
+libsql = { version = "0.9.11", features = [ "parser", "serde" ] }
+log = "0.4.27"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = { version = "1.0.140", features = ["raw_value"] }
+thiserror = "2.0.12"
+tokio = { version = "1.45.1", features = [] }
 
 # [features]
 # libsql = ["libsql/parser", "libsql/serde"]
