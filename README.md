@@ -7,7 +7,7 @@
 
 ---
 
-Kyval is a simple key-value store based on LibSQL. This project is a fork of [Kyval Rust][keyv-rust],
+Kyval is a simple key-value store based on LibSQL. This project is a fork of [Keyv Rust][keyv-rust],
 originally created by [Christian Llontop][chrisllontop]. By utilizing LibSQL, Kyval offers a lightweight
 and flexible alternative for simple data storage needs.
 
